@@ -248,3 +248,45 @@ the ten edited Activity files are `CampusHome`, `Dashboard`, `MyReports`, `Notif
 * Run the app on a device: first launch seeding, community votes, and the admin verify → assign →
   resolve path.
 * `docs/database-layer.md` still carries the open findings DB-F-04 to DB-F-12.
+
+### AI-2026-11-19-01 — Unblock the CI gate, restore the API-27 theme variant, correct the QA deliverables
+
+| | |
+|---|---|
+| **Date** | 2026-11-19 (Asia/Kuala_Lumpur) |
+| **Author** | BudiBytes team (commit author) |
+| **Commit** | `TBD` — `fix: unblock the CI gate and restore API-27 theme inheritance` |
+| **Tool** | DeepSeek Harness (`dsh`) coding agent, model `deepseek-flash`, web interface |
+| **AI used for** | `.github/workflows/android-ci.yml`, `qa-devops-deliverables/android-ci.yml`, `values/styles.xml`, `values-v27/styles.xml`, `qa-devops-deliverables/upload-and-branch-protection.md`, `test-plan.md`, `performance-test-plan.md`, `test-cases.csv`, `test-data.csv` |
+| **Verification** | The workflow fix was proven on the throwaway PR #8: run 44547494014 finished green in 3m19s (lint, JVM unit tests, debug APK, artifact). The theme change was **not** run on a device or emulator. |
+| **Human changes** | The author asked for the fix branch; accepting the theme change and the QA corrections is the author's decision. Nothing was merged by the AI. |
+
+**Prompts**
+
+> 1. "so can this CI be merged? just need to know will it functions as it stated"
+> 2. "ok now just open another branch call fix/test and dont forget to follow the documentation in docs/"
+
+**What the AI produced**
+
+* `.github/workflows/android-ci.yml`, `qa-devops-deliverables/android-ci.yml` — `android-actions/setup-android@v3` becomes `@v4`, because v3's default `packages` includes the `tools` package that Google removed from the SDK repository, so the action exits 1 before any Gradle task runs. `platforms;android-37` becomes `platforms;android-37.0`, because API 37 platforms are minor-versioned and that is the hash `compileSdk { release(37) }` resolves to.
+* `values/styles.xml`, `values-v27/styles.xml` — an `AppTheme.Base` style now owns the parent and the items; the `values-v27` variant inherits it and adds only `android:windowLightNavigationBar`. A resource qualifier replaces rather than merges a style, so the previous bare `AppTheme` in `values-v27` had dropped the parent, the colours, the background and the font on API 27+.
+* `upload-and-branch-protection.md` — the required check is `Lint, test, and build debug APK`, not `Lint, test, and build debug APK / build`.
+* `test-plan.md`, `performance-test-plan.md` — the report store is Room, not SharedPreferences; SharedPreferences holds only the session role and e-mail.
+* `test-cases.csv` — `MAP-002` and `CI-001` re-quoted; both parsed to 11 and 12 fields before.
+* `test-data.csv` — demo accounts replaced with the two roles the app actually has (`student@um.edu.my`, `admin@um.edu.my`, shared password `RainGuard123!`).
+
+**How it was checked**
+
+* The two workflow fixes were run for real on PR #8: the unchanged workflow failed at `Set up Android SDK` (`Failed to find package 'tools'`), the fixed one passed every step and uploaded a 5.9 MB `app-debug-apk`.
+* `test-cases.csv` re-parsed with a CSV reader: every row now has nine fields.
+* The theme change was reasoned about, not executed: the rule that a qualifier entry replaces the base style is the same rule that made the earlier version wrong.
+
+**What stayed human**
+
+* Whether to document demo credentials at all, and whether to keep `AppTheme` on the platform Material parent instead of migrating to Material3, are the author's calls.
+* The QA corrections were proposed by the AI; the author accepts or rejects them.
+
+**Follow-ups**
+
+* Run the app on the API 37 emulator: confirm the theme keeps its background, colours and `NoActionBar` parent, and that the navigation bar still renders light.
+* `docs/activity-lifecycle-plan.md` still documents the removed `onBackPressed()` override (PR #7 replaced it with `OnBackPressedDispatcher`); that needs its own documentation pass.

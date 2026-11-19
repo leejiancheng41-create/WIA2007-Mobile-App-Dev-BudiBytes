@@ -45,4 +45,4 @@ Check the core reporting, review, maintenance, map/risk, and notification journe
 
 ## Known test-environment limitation
 
-The app seeds static demo records and stores report data locally in SharedPreferences. Network/offline, AI timeout, notification delivery, and moderator authorization cases cannot be represented as backend integration tests until corresponding backend/services exist; use the specified manual simulation and label results accordingly.
+The app seeds static demo records and stores report data locally in a Room database (`RainGuardDatabase`); SharedPreferences holds only the session role and e-mail. Network/offline, AI timeout, notification delivery, and moderator authorization cases cannot be represented as backend integration tests until corresponding backend/services exist; use the specified manual simulation and label results accordingly.
