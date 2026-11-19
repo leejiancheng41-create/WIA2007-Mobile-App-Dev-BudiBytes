@@ -1,6 +1,5 @@
 package com.um.rainguard.ui.base;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -19,6 +18,8 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.ComponentActivity;
+import androidx.activity.OnBackPressedCallback;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -42,7 +43,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public abstract class BaseActivity extends Activity {
+public abstract class BaseActivity extends ComponentActivity {
     protected SharedPreferences preferences;
     protected ReportRepository repository;
 
@@ -61,6 +62,13 @@ public abstract class BaseActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                handleBackNavigation();
+            }
+        });
 
         getWindow().setStatusBarColor(Constants.BG);
         getWindow().setNavigationBarColor(Constants.BG);
@@ -405,8 +413,8 @@ public abstract class BaseActivity extends Activity {
     }
 
     /**
-     * These Activities are plain {@link Activity}s, not {@code AppCompatActivity}s, so they are not
-     * a {@code LifecycleOwner}. Observers are attached forever and detached in onDestroy instead.
+     * Observers use observeForever and are detached in onDestroy to avoid callbacks after
+     * this Activity is destroyed.
      */
     protected <T> void observe(LiveData<T> liveData, Observer<T> observer) {
         liveData.observeForever(observer);
@@ -422,8 +430,7 @@ public abstract class BaseActivity extends Activity {
         super.onDestroy();
     }
 
-    @Override
-    public void onBackPressed() {
+    private void handleBackNavigation() {
         if (role != null && "report-details".equals(currentPage)) {
             NavigationHelper.navigateTo(this, role, userEmail, returnPage, null, returnPage);
             finish();
@@ -433,7 +440,7 @@ public abstract class BaseActivity extends Activity {
         } else if (role != null) {
             signOut();
         } else {
-            super.onBackPressed();
+            finish();
         }
     }
 }
