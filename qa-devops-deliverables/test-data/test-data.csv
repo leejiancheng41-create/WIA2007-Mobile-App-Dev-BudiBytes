@@ -1,0 +1,15 @@
+Record Type,ID,Role/Status,Sample values,Expected use,Privacy note
+Account,STU-01,Student,student01@example.invalid; synthetic password set outside repo,Submit and view own reports,Fake address; no credential included
+Account,STAFF-01,Staff,staff01@example.invalid; synthetic password set outside repo,Campus user report submission,Fake address; no credential included
+Account,MOD-01,Moderator,moderator01@example.invalid; synthetic password set outside repo,Verify/reject reports,Fake address; no credential included
+Account,ADMIN-01,Admin,admin01@example.invalid; synthetic password set outside repo,Manage test users,Fake address; no credential included
+Report,REP-SUB-01,Submitted,Clogged drain; Engineering Block A; High risk,Submission/list/details tests,Synthetic only
+Report,REP-VER-01,Verified,Stagnant water; KK8 walkway; High risk,Moderator/map tests,Synthetic only
+Report,REP-PROG-01,In progress,Drain inspection; team Drainage QA,Maintenance task tests,Synthetic only
+Report,REP-RES-01,Resolved,Debris cleared; resolution demo,History and resolved state tests,Synthetic only
+Report,REP-REJ-01,Rejected,Duplicate test report; reason duplicate,Reject flow and status filter tests,Synthetic only
+Alert,ALT-ACT-01,Active,Heavy rain watch; expires 2099-01-01T00:00:00Z,Active alert display tests,Synthetic only
+Alert,ALT-EXP-01,Expired,Old rain watch; expires 2000-01-01T00:00:00Z,Expired alert hidden test,Synthetic only
+AI result,AI-HIGH-01,High confidence,category=clogged; confidence=0.96,High-confidence display test,Synthetic only
+AI result,AI-LOW-01,Low confidence,category=overflow; confidence=0.32,Low-confidence review test,Synthetic only
+AI result,AI-FAIL-01,Timeout,synthetic timeout after configured client threshold,AI failure/retry test,Synthetic only

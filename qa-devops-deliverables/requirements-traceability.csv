@@ -1,0 +1,12 @@
+Requirement ID,Requirement summary,Test ID(s),Expected result,Implementation/source,Status
+FR-REPORT-01,Campus user submits a drainage report with required description,REP-001; REP-002,Valid report is stored once; missing/short description is rejected,ReportSubmissionActivity.java,Proposed mapping; confirm IDs with team
+FR-REPORT-02,User can attach a report photo,REP-004; REP-005,Cancel is safe; selected image URI is retained,ReportSubmissionActivity.java,Proposed mapping; confirm IDs with team
+FR-REPORT-03,Report owner details are access-controlled,REV-001,Other campus user cannot see private owner identity,MyReportsActivity.java and role/navigation logic,Proposed mapping; verify policy
+FR-MOD-01,Authorized administrator verifies reports,REV-002; REV-003,Admin action updates status; unauthorized action is blocked,AllReportsActivity.java and role/navigation logic,Proposed mapping; verify actual authorization
+FR-MAINT-01,Administrator assigns and completes maintenance tasks,MAINT-001; MAINT-002; MAINT-003,Task assignment/resolution persists; non-admin is blocked,MaintenanceTasksActivity.java,Proposed mapping; verify actual authorization
+FR-MAP-01,Users view hazards and risk levels,MAP-001; MAP-002; MAP-003,Map and risk overview match report data and remain usable,HazardMapActivity.java; RiskOverviewActivity.java,Proposed mapping
+FR-NOTIF-01,Users view notification state,NOTIF-001; NOTIF-002,Read state is consistent; denied permission is handled honestly,NotificationsActivity.java,Proposed mapping; confirm notification implementation
+NFR-RELIABILITY-01,Submission survives app relaunch,REP-005; REV-005; MAINT-002,Stored report/task state is restored consistently,ReportRepository.java,Proposed mapping
+NFR-PERFORMANCE-01,Map/list meets agreed load and scroll performance,PERF-001,Measured timings meet team-approved threshold,Map/list screens,Threshold not provided
+NFR-PRIVACY-01,No unauthorized identity disclosure or moderation,REV-001; REV-003; MAINT-003,Private data/actions remain inaccessible to unauthorized roles,Role/navigation and report screens,Proposed mapping; security review required
+NFR-CI-01,Every PR and main/develop push receives automated quality/build checks,CI-001; CI-002; CI-003,Checks pass and APK artifact is uploaded,qa-devops-deliverables/android-ci.yml,Pending GitHub upload
