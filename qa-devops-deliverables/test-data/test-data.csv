@@ -1,8 +1,6 @@
 Record Type,ID,Role/Status,Sample values,Expected use,Privacy note
-Account,STU-01,Student,student01@example.invalid; synthetic password set outside repo,Submit and view own reports,Fake address; no credential included
-Account,STAFF-01,Staff,staff01@example.invalid; synthetic password set outside repo,Campus user report submission,Fake address; no credential included
-Account,MOD-01,Moderator,moderator01@example.invalid; synthetic password set outside repo,Verify/reject reports,Fake address; no credential included
-Account,ADMIN-01,Admin,admin01@example.invalid; synthetic password set outside repo,Manage test users,Fake address; no credential included
+Account,STU-01,Campus user,student@um.edu.my; demo password RainGuard123!,Submit and view own reports,Shared demo credential; not a real person
+Account,ADM-01,Administrator,admin@um.edu.my; demo password RainGuard123!,Verify/reject reports; assign and resolve tasks,Shared demo credential; not a real person
 Report,REP-SUB-01,Submitted,Clogged drain; Engineering Block A; High risk,Submission/list/details tests,Synthetic only
 Report,REP-VER-01,Verified,Stagnant water; KK8 walkway; High risk,Moderator/map tests,Synthetic only
 Report,REP-PROG-01,In progress,Drain inspection; team Drainage QA,Maintenance task tests,Synthetic only

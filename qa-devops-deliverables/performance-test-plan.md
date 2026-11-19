@@ -31,4 +31,4 @@ The repository currently has no backend/API endpoint or k6 script, so this plan 
 
 ## Limitations
 
-The current project seeds local demo reports and persists them in SharedPreferences. It does not expose a production-like API, so the 100-VU API target cannot be validated against this repository alone. Emulator timings are not representative of physical UM devices or real mobile networks.
+The current project seeds local demo reports and persists them in a Room database. It does not expose a production-like API, so the 100-VU API target cannot be validated against this repository alone. Emulator timings are not representative of physical UM devices or real mobile networks.

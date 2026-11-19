@@ -21,7 +21,7 @@ Then open a pull request to `main`. Keep test artifacts and reports free of real
 After the workflow has run once, configure **Settings → Branches → Add branch protection rule** for `main` (and `develop` if the team uses it):
 
 1. Require a pull request before merging.
-2. Require the status check **Lint, test, and build debug APK / build**.
+2. Require the status check **Lint, test, and build debug APK** (the check-run name shown on a PR).
 3. Require at least one approving review if team policy requires it.
 4. Block force pushes and branch deletion on protected branches.
 5. Apply the same protections to administrators if team policy requires it.
